@@ -1,4 +1,9 @@
 # Python-generated files
+.idea/
+.vscode
+!.vscode/launch.json
+!.vscode/task.json
+
 __pycache__/
 *.py[oc]
 build/
