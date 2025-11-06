@@ -1,0 +1,66 @@
+[submodule "comfyui"]
+	path = libs/comfyui
+	url = https://github.com/comfyanonymous/ComfyUI.git
+[submodule "comfyui-manager"]
+	path = libs/comfyui-manager
+	url = https://github.com/Comfy-Org/ComfyUI-Manager.git
+[submodule "comfyui-videohelpersuite"]
+	path = libs/comfyui-videohelpersuite
+	url = https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git
+[submodule "comfyui-frameinterpolation"]
+	path = libs/comfyui-frameinterpolation
+	url = https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git
+[submodule "comfyui-math"]
+	path = libs/comfyui-math
+	url = https://github.com/evanspearman/ComfyMath.git
+[submodule "comfyui-rgthree"]
+	path = libs/comfyui-rgthree
+	url = https://github.com/rgthree/rgthree-comfy.git
+[submodule "comfyui-gguf"]
+	path = libs/comfyui-gguf
+	url = https://github.com/city96/ComfyUI-GGUF.git
+[submodule "comfyui-wanvideowrapper"]
+	path = libs/comfyui-wanvideowrapper
+	url = https://github.com/kijai/ComfyUI-WanVideoWrapper.git
+[submodule "comfyui-kjnodes"]
+	path = libs/comfyui-kjnodes
+	url = https://github.com/kijai/ComfyUI-KJNodes.git
+[submodule "comfyui-multigpu"]
+	path = libs/comfyui-multigpu
+	url = https://github.com/pollockjj/ComfyUI-MultiGPU.git
+[submodule "comfyui-easyuse"]
+	path = libs/comfyui-easyuse
+	url = https://github.com/yolain/ComfyUI-Easy-Use.git
+[submodule "comfyui-wasnodesuitecomfyui"]
+	path = libs/comfyui-wasnodesuitecomfyui
+	url = https://github.com/WASasquatch/was-node-suite-comfyui.git
+[submodule "comfyui-customscripts"]
+	path = libs/comfyui-customscripts
+	url = https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git
+[submodule "comfyui-controlnetaux"]
+	path = libs/comfyui-controlnetaux
+	url = https://github.com/Fannovel16/comfyui_controlnet_aux.git
+[submodule "comfyui-layerstyle"]
+	path = libs/comfyui-layerstyle
+	url = https://github.com/chflame163/ComfyUI_LayerStyle.git
+[submodule "comfyui-essentials"]
+	path = libs/comfyui-essentials
+	url = https://github.com/cubiq/ComfyUI_essentials.git
+[submodule "comfyui-cguseeverywhere"]
+	path = libs/comfyui-cguseeverywhere
+	url = https://github.com/chrisgoringe/cg-use-everywhere.git
+[submodule "comfyui-tripleksampler"]
+	path = libs/comfyui-tripleksampler
+	url = https://github.com/VraethrDalkr/ComfyUI-TripleKSampler.git
+[submodule "comfyui-mediamixer"]
+	path = libs/comfyui-mediamixer
+	url = https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git
+[submodule "comfyui-wanmoeksampler"]
+	path = libs/comfyui-wanmoeksampler
+	url = https://github.com/stduhpf/ComfyUI-WanMoeKSampler.git
+[submodule "comfyui-ultimatesduupscale"]
+	path = libs/comfyui-ultimatesduupscale
+	url = https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git
+[submodule "comfyui-fillnodes"]
+	path = libs/comfyui-fillnodes
+	url = https://github.com/filliptm/ComfyUI_Fill-Nodes.git
