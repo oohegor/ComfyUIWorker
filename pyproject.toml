@@ -1,7 +1,22 @@
+[build-system]
+requires = ["setuptools>=80", "setuptools-scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "comfyui-worker"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "packaging~=25.0",
+    "tomlkit~=0.13",
+]
+
+[project.optional-dependencies]
+full = ["accelerate>=1.2.1", "addict", "aiohttp>=3.11.8", "albumentations", "alembic", "av>=14.2.0", "blend_modes", "chardet", "clip_interrogator>=0.6.0", "cmake", "color-matcher", "colour-science", "comfyui-embedded-docs==0.3.1", "comfyui-frontend-package==1.28.8,>=1.25.0", "comfyui-workflow-templates==0.2.11", "cupy-wheel", "diffusers>=0.33.0", "einops", "fairscale>=0.4.4", "fal-client", "filelock", "ftfy", "fvcore", "gdown", "gguf>=0.13.0,>=0.17.1", "gitpython", "glfw", "glitch_this", "google-cloud-storage", "google-genai", "httpx", "huggingface-hub>0.20", "huggingface_hub>=0.23.4", "imageio", "imageio-ffmpeg", "importlib_metadata", "joblib", "kornia>=0.7.1", "lark", "librosa", "loguru", "matplotlib", "matrix-nio", "mediapipe", "moviepy==1.0.3", "mss", "numba", "numpy>=1.25.0", "ollama", "omegaconf", "onnxruntime", "open_clip_torch", "openai", "opencv-contrib-python", "opencv-python>=4.7.0.72", "opencv-python-headless<=4.7.0.72", "pause", "pdf2image", "peft>=0.17.0", "pilgram", "pillow>=10.3.0", "pixeloe", "protobuf", "psutil", "pydantic~=2.0", "pydantic-settings~=2.0", "pygithub", "pyloudnorm", "pymatting", "pymupdf", "pyopengl", "pypdf2", "python-dateutil", "pyyaml", "rembg", "reportlab", "requests", "rich", "runwayml", "safetensors>=0.4.2", "scikit-image>=0.20.0", "scikit-learn", "scikit_image", "scikit_learn", "scipy>=1.13.1", "sentencepiece>=0.2.0", "sounddevice", "spandrel", "sqlalchemy", "timm>=0.4.12", "tokenizers>=0.13.3", "toml", "tomli>=1.2.0", "torch", "torchaudio", "torchsde", "torchvision", "tqdm", "transformers>=4.37.2,>=4.43.2", "transparent-background", "trimesh", "typer", "typing-extensions", "uv", "yacs", "yapf", "yarl>=1.18.0", "yt_dlp"]
+
+[tool.setuptools.dynamic]
+version = {attr = "main.__version__"}
+
+[tool.setuptools-scm]
