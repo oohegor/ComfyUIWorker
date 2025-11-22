@@ -19,6 +19,12 @@ except ImportError:
     print("Error: Missing dependencies, install both with this command: uv sync", file=sys.stderr)
     sys.exit(1)
 
+# Packages to exclude from the combined requirements
+EXCLUDE_PACKAGES = {"chardet", "cmake", "cupy-wheel", "gdown", "numpy", "opencv-python-headless", "opencv-python", "pause", "scikit_image", "scikit_learn", "typer", "typing-extensions", "uv"}
+
+# Packages to always include in the combined requirements
+INCLUDE_PACKAGES = ["cupy-cuda13x", "numpy>=1.25.0,<2", "onnx"]
+
 
 def _extract_pyproject(path: Path) -> list[str]:
     """
@@ -104,7 +110,7 @@ def process_library(path: Path) -> list[str]:
                 deps.extend(_extract_pyproject(Path(it.path)))
             # Read any project requirements file from the ComfyUI libraries
             # Ex.: requirements.txt, requirements.in, requirements-dev.txt, etc
-            if it.is_file() and "requirements" in it.name:
+            if it.is_file() and "requirements" in it.name and (it.name.endswith(".txt") or it.name.endswith(".in")):
                 deps.extend(_extract_requirements(Path(it.path)))
 
     return deps
@@ -129,6 +135,11 @@ def get_specifiers(dependencies: list[str]) -> list[str]:
     pkg_specifiers: dict[str, SpecifierSet] = {}
 
     for dep_str in dependencies:
+        # Treat git dependencies as-is
+        if dep_str.startswith("git+"):
+            pkg_specifiers[dep_str] = SpecifierSet("")
+            continue
+
         try:
             # Parse the requirement using packaging
             req = Requirement(dep_str)
@@ -157,33 +168,16 @@ def get_specifiers(dependencies: list[str]) -> list[str]:
 
 def combine_requirements(dependencies: list[str]) -> None:
     """
-    Read pyproject.toml and update the [project.optional-dependencies.full] group
-    with the provided dependencies.
+    Write combined dependencies to requirements.txt.
 
     Args:
-        dependencies: List of dependency strings to add to the 'full' group
+        dependencies: List of dependency strings to write
     """
-    # Get the path to pyproject.toml (assuming it's in the parent directory)
     script_dir = Path(__file__).parent
-    pyproject_path = script_dir.parent / "pyproject.toml"
+    requirements_path = script_dir.parent / "requirements.txt"
 
-    # Read the pyproject.toml file
-    with open(pyproject_path, "r") as f:
-        data = tomlkit.load(f)
-
-    # Ensure the structure exists
-    if "project" not in data:
-        data["project"] = {}
-
-    if "optional-dependencies" not in data["project"]:
-        data["project"]["optional-dependencies"] = {}
-
-    # Update the 'full' group with the provided dependencies
-    data["project"]["optional-dependencies"]["full"] = dependencies
-
-    # Write back to the file
-    with open(pyproject_path, "w") as f:
-        tomlkit.dump(data, f)
+    with open(requirements_path, "w") as f:
+        f.write("\n".join(dependencies) + "\n")
 
 
 def main():
@@ -219,7 +213,11 @@ def main():
     # Combine and deduplicate specifiers
     vers = get_specifiers(deps)
 
-    print(f"\nTotal unique dependencies: {len(vers)}")
+    # Remove specific Python packages
+    vers = [v for v in vers if v.startswith("git+") or Requirement(v).name.lower() not in EXCLUDE_PACKAGES]
+
+    # Include specific Python packages
+    vers = sorted(vers + [p for p in INCLUDE_PACKAGES if p not in vers])
 
     # Write to pyproject.toml
     combine_requirements(vers)

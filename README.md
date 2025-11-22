@@ -2,28 +2,36 @@
 
 Docker-based ComfyUI worker with CUDA support.
 
-## Building the Docker Image
-
-Build the Docker image with CUDA 12.8.1:
+## Quick Start
 
 ```bash
-docker buildx build --build-arg CUDA_VERSION=12.8.1 -t comfyui-worker .
+make build
+make run
+```
+
+## Make Commands
+
+| Command | Description |
+|---------|-------------|
+| `make init` | Initialize git submodules and create symlinks |
+| `make deps` | Generate requirements.txt from all library dependencies |
+| `make build` | Build Docker image (runs deps automatically) |
+| `make run` | Run container with GPU access |
+
+## Building the Docker Image
+
+Build the Docker image with the default CUDA version (13.0.2):
+
+```bash
+make build
 ```
 
 ### Custom CUDA Version
 
-To build with a different CUDA version, change the `CUDA_VERSION` argument:
+To build with a different CUDA version, run docker buildx directly:
 
 ```bash
-docker buildx build --build-arg CUDA_VERSION=12.6.0 -t comfyui-worker .
-```
-
-### Default Build
-
-The default CUDA version is `12.8.1`, so you can omit the build argument:
-
-```bash
-docker buildx build -t comfyui-worker .
+docker buildx build --build-arg CUDA_VERSION=12.8.1 -t comfyui-worker .
 ```
 
 ## Running the Container
@@ -33,15 +41,7 @@ docker buildx build -t comfyui-worker .
 Run the container with GPU access:
 
 ```bash
-docker run --gpus all -p 8080:8080 comfyui-worker
-```
-
-### Run in Detached Mode
-
-Run the container in the background:
-
-```bash
-docker run -d --gpus all -p 8080:8080 --name comfyui-worker comfyui-worker
+make run
 ```
 
 ### Run with Volume Mounts

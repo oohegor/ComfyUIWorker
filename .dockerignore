@@ -1,0 +1,6 @@
+.ruff_cache/
+.venv/
+__pycache__/
+comfyui_worker.egg-info/
+.pre-commit-config.yaml
+README.md
