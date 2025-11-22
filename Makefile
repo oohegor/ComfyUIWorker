@@ -1,4 +1,4 @@
-.PHONY: init deps build
+.PHONY: init deps build run
 
 init:
 	git submodule --quiet update --init --recursive --force
@@ -7,7 +7,7 @@ init:
 deps:
 	uv run --with "packaging~=25.0" --with "tomlkit~=0.13" -- scripts/combine_requirements.py libs/*
 
-build: deps
+build:
 	docker buildx build --build-arg CUDA_VERSION=13.0.2 -t comfyui-worker .
 
 run:
