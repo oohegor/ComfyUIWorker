@@ -13,3 +13,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# This file should be generated automatically on deployment
+requirements.txt
